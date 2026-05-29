@@ -43,6 +43,8 @@ HTML-отчёт можно открыть как статические файл
 
 ```bash
 bunx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+npx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+pnpm dlx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
 ```
 
 Полная форма:
@@ -62,6 +64,10 @@ Exit codes:
 - `0` - анализ завершён без нарушений выбранного порога;
 - `1` - найдены нарушения, соответствующие `--fail-on`;
 - `2` - ошибка конфигурации, чтения проекта, анализа или экспорта.
+
+## Package managers
+
+Пакет можно запускать через `bunx`, `npx` и `pnpm dlx`. Репозиторий также поддерживает локальные команды `bun run`, `npm run` и `pnpm run` для build/test workflow.
 
 ## Конфигурация
 

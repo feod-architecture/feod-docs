@@ -43,6 +43,8 @@ The HTML report can be opened as static files or served locally with `--serve`.
 
 ```bash
 bunx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+npx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+pnpm dlx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
 ```
 
 Full form:
@@ -62,6 +64,10 @@ Exit codes:
 - `0` - analysis completed without violations at the selected threshold;
 - `1` - violations matched `--fail-on`;
 - `2` - configuration, project reading, analysis, or export error.
+
+## Package managers
+
+The package can be executed through `bunx`, `npx`, and `pnpm dlx`. The repository also supports local `bun run`, `npm run`, and `pnpm run` commands for build/test workflows.
 
 ## Configuration
 
