@@ -42,9 +42,9 @@ The HTML report can be opened as static files or served locally with `--serve`.
 ## CLI
 
 ```bash
-bunx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
-npx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
-pnpm dlx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+bunx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
+npx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
+pnpm dlx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
 ```
 
 Full form:

@@ -42,9 +42,9 @@ HTML-отчёт можно открыть как статические файл
 ## CLI
 
 ```bash
-bunx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
-npx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
-pnpm dlx @feod-architecture/analyzer analyze ./src --out ./dist/feod --formats html,json
+bunx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
+npx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
+pnpm dlx @feod/analyzer analyze ./src --out ./dist/feod --formats html,json
 ```
 
 Полная форма:
