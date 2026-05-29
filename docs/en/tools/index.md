@@ -5,18 +5,21 @@ Tools help apply FEOD in a project, but they do not replace understanding the me
 ```mermaid
 flowchart LR
   rules["FEOD rules"] --> config["feod config"]
+  config --> analyzer["FEOD Analyzer"]
   config --> eslint["eslint"]
   config --> ai["AI rules"]
+  analyzer --> report["HTML/JSON report"]
   eslint --> ci["CI"]
   ai --> review["review"]
 ```
 
 ## What is included in the first stage
 
-In the first stage, the documentation describes only three directions.
+In the first stage, the documentation describes confirmed tooling directions and one ready CLI artifact.
 
 | Tool | Why it is needed | Description status |
 | --- | --- | --- |
+| [FEOD Analyzer](./feod-analyzer.md) | Build a graph of FEOD entities, detect import and public API violations, and export an HTML/JSON report. | Ready CLI artifact, launch scenarios, configuration, and limitations. |
 | [ESLint plugin](./eslint-plugin.md) | Check architectural violations: bypassing public API, reverse dependencies, deep imports. | Adoption scenario, checks, and CI flow. |
 | [AI rules](./ai-rules.md) | Give AI assistants rules for project structure, review, and code generation. | Rule set, inputs, and result validation. |
 | [FEOD config](./feod-config.md) | Capture configuration for levels, modules, and allowed deviations. | Contract for the linter, AI rules, and internal checks. |

@@ -461,6 +461,7 @@ const toolsSidebar = [
     text: "Tools",
     items: [
       { text: "Обзор", link: "/tools/" },
+      { text: "FEOD Analyzer", link: "/tools/feod-analyzer" },
       { text: "ESLint plugin", link: "/tools/eslint-plugin" },
       { text: "AI rules", link: "/tools/ai-rules" },
       { text: "FEOD config", link: "/tools/feod-config" },
@@ -473,6 +474,7 @@ const enToolsSidebar = [
     text: "Tools",
     items: [
       { text: "Overview", link: "/en/tools/" },
+      { text: "FEOD Analyzer", link: "/en/tools/feod-analyzer" },
       { text: "ESLint Plugin", link: "/en/tools/eslint-plugin" },
       { text: "AI Rules", link: "/en/tools/ai-rules" },
       { text: "FEOD Config", link: "/en/tools/feod-config" },

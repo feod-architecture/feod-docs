@@ -26,6 +26,7 @@ const requiredPages = [
   "docs/tutorial/ecommerce-walkthrough.md",
   "docs/core-concepts/public-api.md",
   "docs/reference/module-contract.md",
+  "docs/tools/feod-analyzer.md",
   "docs/tools/eslint-plugin.md",
   "docs/tools/ai-rules.md",
   "docs/tools/feod-config.md",

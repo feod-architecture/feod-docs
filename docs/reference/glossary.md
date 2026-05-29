@@ -36,6 +36,7 @@ flowchart TB
 | Adapter-слой | Тонкий слой, который соединяет framework routing или runtime с FEOD-страницами и модулями. | [Next.js и Nuxt](../frameworks/next-nuxt.md) |
 | README модуля | Документ внутри модуля, который описывает ответственность, потребителей, public API и ограничения. | [Как писать README модуля](../guides/module-readme.md) |
 | MAINTAINERS | Файл ownership для крупного или критичного модуля. Не обязателен для каждого маленького модуля. | [Правила именования](./naming.md) |
+| FEOD Analyzer | CLI-инструмент, который строит граф FEOD-сущностей, находит нарушения импортов и public API, экспортирует HTML/JSON отчёт. | [FEOD Analyzer](../tools/feod-analyzer.md) |
 | ESLint plugin | Tooling-направление для автоматической проверки импортов, public API и других FEOD-ограничений. | [ESLint plugin](../tools/eslint-plugin.md) |
 | AI rules | Набор правил для AI-ассистентов, который помогает генерировать и ревьюить код в границах FEOD. | [AI rules](../tools/ai-rules.md) |
 | FEOD config | Машинно-читаемая конфигурация уровней, aliases, правил и исключений проекта. | [FEOD config](../tools/feod-config.md) |

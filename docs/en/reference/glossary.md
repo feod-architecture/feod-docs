@@ -36,6 +36,7 @@ This page gives short definitions of FEOD terms. For detailed rules, see the rel
 | Adapter layer | A thin layer that connects framework routing or runtime with FEOD pages and modules. | [Next.js and Nuxt](../frameworks/next-nuxt.md) |
 | Module README | A document inside a module that describes responsibility, consumers, public API, and constraints. | [How to Write a Module README](../guides/module-readme.md) |
 | MAINTAINERS | An ownership file for a large or critical module. It is not required for every small module. | [Naming Rules](./naming.md) |
+| FEOD Analyzer | A CLI tool that builds a graph of FEOD entities, detects import and public API violations, and exports an HTML/JSON report. | [FEOD Analyzer](../tools/feod-analyzer.md) |
 | ESLint plugin | A tooling direction for automated checks of imports, public API, and other FEOD constraints. | [ESLint plugin](../tools/eslint-plugin.md) |
 | AI rules | A set of rules for AI assistants that helps generate and review code within FEOD boundaries. | [AI rules](../tools/ai-rules.md) |
 | FEOD config | Machine-readable configuration of project levels, aliases, rules, and exceptions. | [FEOD config](../tools/feod-config.md) |
