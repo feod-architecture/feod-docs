@@ -1,0 +1,56 @@
+# FEOD
+
+> FEOD (Fractal Entity Oriented Design) is a frontend architecture methodology for organizing applications around modules, public API, fractal structure, and controlled dependencies.
+
+## Summary
+
+FEOD helps frontend teams keep project structure readable and verifiable as codebases grow. It defines top-level levels, module boundaries, allowed imports, and public API rules. The documentation is available in Russian and English; the Russian root is the default locale, and English pages live under `/en/`.
+
+## Start Here
+
+- [Overview](https://fractal-oriented.tech/en/get-started/overview): English introduction to FEOD, its purpose, levels, and differences from regular modular architecture and FSD.
+- [Обзор](https://fractal-oriented.tech/get-started/overview): Русское введение в FEOD, уровни, модули, public API и контролируемые зависимости.
+- [Quick Start](https://fractal-oriented.tech/en/get-started/quick-start): Minimal project frame and first import rules.
+- [Быстрый старт](https://fractal-oriented.tech/get-started/quick-start): Минимальный FEOD-каркас для нового frontend-проекта.
+- [FEOD in 5 Minutes](https://fractal-oriented.tech/en/get-started/feod-in-5-minutes): Short learning path for the core idea.
+- [FEOD за 5 минут](https://fractal-oriented.tech/get-started/feod-in-5-minutes): Короткий путь к базовой модели FEOD.
+
+## Core Concepts
+
+- [Modularity](https://fractal-oriented.tech/en/core-concepts/modularity): Modules as responsibility boundaries.
+- [Fractality](https://fractal-oriented.tech/en/core-concepts/fractality): Repeating structural principles at different scales.
+- [Entity Orientation](https://fractal-oriented.tech/en/core-concepts/entity-orientation): Files and directories as FEOD entities with roles.
+- [Levels](https://fractal-oriented.tech/en/core-concepts/levels): `app`, `pages`, `modules`, `common`, and `global`.
+- [Public API](https://fractal-oriented.tech/en/core-concepts/public-api): Supported contracts for using FEOD entities.
+- [Dependency Rules](https://fractal-oriented.tech/en/core-concepts/dependency-rules): Controlled dependency direction and boundary rules.
+
+## Reference
+
+- [Import Matrix](https://fractal-oriented.tech/en/reference/import-matrix): Allowed imports between FEOD levels.
+- [Module Contract](https://fractal-oriented.tech/en/reference/module-contract): What a module must expose and protect.
+- [Public API Rules](https://fractal-oriented.tech/en/reference/public-api): Rules for `index.ts` and external consumption.
+- [Naming Rules](https://fractal-oriented.tech/en/reference/naming): Canonical level, module, and public API naming.
+- [Code Smells](https://fractal-oriented.tech/en/reference/code-smells): Common signs of boundary violations.
+- [Glossary](https://fractal-oriented.tech/en/reference/glossary): Canonical FEOD terms.
+
+## Guides
+
+- [Where to Place Code](https://fractal-oriented.tech/en/guides/where-to-place-code): Decision guide for placing files.
+- [How to Design a Module](https://fractal-oriented.tech/en/guides/design-module): Module design workflow.
+- [How to Split a Large Module](https://fractal-oriented.tech/en/guides/split-large-module): Gradual decomposition rules.
+- [Migration from FSD](https://fractal-oriented.tech/en/guides/migration-from-fsd): Moving from Feature-Sliced Design to FEOD.
+- [Code Review Checklist](https://fractal-oriented.tech/en/guides/code-review): Review checklist for FEOD changes.
+
+## Tools
+
+- [FEOD Analyzer](https://fractal-oriented.tech/en/tools/feod-analyzer): CLI scenario for checking FEOD architecture.
+- [ESLint Plugin](https://fractal-oriented.tech/en/tools/eslint-plugin): Linting scenario for accepted FEOD rules.
+- [AI Rules](https://fractal-oriented.tech/en/tools/ai-rules): Guidance for AI-assisted FEOD project work.
+- [FEOD Config](https://fractal-oriented.tech/en/tools/feod-config): Machine-readable project configuration concept.
+
+## Optional
+
+- [Comparison with FSD](https://fractal-oriented.tech/en/about/comparison-fsd): How FEOD differs from Feature-Sliced Design.
+- [Comparison with Atomic Design](https://fractal-oriented.tech/en/about/comparison-atomic-design): How FEOD relates to UI component taxonomies.
+- [Framework Appendices](https://fractal-oriented.tech/en/frameworks/): React, Vue, Next.js, and Nuxt notes.
+- [llms-full.txt](https://fractal-oriented.tech/llms-full.txt): Expanded AI-readable FEOD context.

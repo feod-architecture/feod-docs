@@ -4,6 +4,19 @@
   "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run docs:build",
   "outputDirectory": "docs/.vitepress/dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.fractal-oriented.tech"
+        }
+      ],
+      "destination": "https://fractal-oriented.tech/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

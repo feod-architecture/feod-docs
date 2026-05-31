@@ -1,6 +1,6 @@
-# Overview
+# FEOD: Frontend Architecture Methodology
 
-FEOD is a methodology for organizing frontend applications around modules, a `public API`, fractal structure, and controlled dependencies.
+FEOD (Fractal Entity Oriented Design) is a methodology for organizing frontend applications around modules, a `public API`, fractal structure, and controlled dependencies.
 
 ```mermaid
 flowchart TB

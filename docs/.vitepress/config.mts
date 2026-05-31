@@ -17,6 +17,26 @@ const themeColor = "#111827";
 
 type LocaleKey = keyof typeof siteDescriptions;
 
+const localeSeo = {
+  root: {
+    lang: "ru-RU",
+    ogLocale: "ru_RU",
+    alternateOgLocale: "en_US",
+  },
+  en: {
+    lang: "en-US",
+    ogLocale: "en_US",
+    alternateOgLocale: "ru_RU",
+  },
+} as const;
+
+const titleOverrides: Record<string, string> = {
+  "index.md": "FEOD - Fractal Entity Oriented Design",
+  "en/index.md": "FEOD - Fractal Entity Oriented Design",
+  "get-started/overview.md": "FEOD: методология frontend-архитектуры",
+  "en/get-started/overview.md": "FEOD: Frontend Architecture Methodology",
+};
+
 type SitemapItem = {
   url: string;
   [key: string]: unknown;
@@ -179,6 +199,70 @@ function isMetaPage(relativePath: string) {
   return stripLocalePrefix(relativePath).startsWith("meta/");
 }
 
+function resolvePageTitle(relativePath: string, fallbackTitle: string) {
+  return titleOverrides[relativePath] || fallbackTitle || "FEOD";
+}
+
+function jsonLdHead(data: Record<string, unknown>): HeadConfig {
+  return ["script", { type: "application/ld+json" }, JSON.stringify(data)];
+}
+
+function buildWebSiteStructuredData(relativePath: string, description: string) {
+  const locale = resolveLocale(relativePath);
+  const homePath = locale === "en" ? "/en/" : "/";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "FEOD",
+    alternateName: "Fractal Entity Oriented Design",
+    url: absoluteUrl(homePath),
+    inLanguage: localeSeo[locale].lang,
+    description,
+    publisher: {
+      "@type": "Organization",
+      name: "FEOD",
+      url: absoluteUrl("/"),
+    },
+  };
+}
+
+function buildBreadcrumbStructuredData(relativePath: string, title: string) {
+  const locale = resolveLocale(relativePath);
+  const homePath = locale === "en" ? "/en/" : "/";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "FEOD",
+        item: absoluteUrl(homePath),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: title,
+        item: absoluteUrl(pagePath(relativePath)),
+      },
+    ],
+  };
+}
+
+function buildStructuredDataHead(pageData: { relativePath: string; title: string }, description: string): HeadConfig[] {
+  if (!siteUrl || isMetaPage(pageData.relativePath)) {
+    return [];
+  }
+
+  if (stripLocalePrefix(pageData.relativePath) === "index.md") {
+    return [jsonLdHead(buildWebSiteStructuredData(pageData.relativePath, description))];
+  }
+
+  return [jsonLdHead(buildBreadcrumbStructuredData(pageData.relativePath, pageData.title))];
+}
+
 function buildPageHead(pageData: { relativePath: string; title: string }, description: string): HeadConfig[] {
   const locale = resolveLocale(pageData.relativePath);
   const title = pageData.title || "FEOD";
@@ -187,7 +271,7 @@ function buildPageHead(pageData: { relativePath: string; title: string }, descri
     ["meta", { name: "robots", content: robots }],
     ["meta", { property: "og:title", content: title }],
     ["meta", { property: "og:description", content: description }],
-    ["meta", { property: "og:locale", content: locale === "en" ? "en_US" : "ru_RU" }],
+    ["meta", { property: "og:locale", content: localeSeo[locale].ogLocale }],
     ["meta", { name: "twitter:title", content: title }],
     ["meta", { name: "twitter:description", content: description }],
   ];
@@ -208,10 +292,10 @@ function buildPageHead(pageData: { relativePath: string; title: string }, descri
       const enPath = pagePath(localizedRelativePath(pageData.relativePath, "en"));
 
       head.push(
-        ["link", { rel: "alternate", hreflang: "ru", href: absoluteUrl(ruPath) }],
-        ["link", { rel: "alternate", hreflang: "en", href: absoluteUrl(enPath) }],
+        ["link", { rel: "alternate", hreflang: "ru-RU", href: absoluteUrl(ruPath) }],
+        ["link", { rel: "alternate", hreflang: "en-US", href: absoluteUrl(enPath) }],
         ["link", { rel: "alternate", hreflang: "x-default", href: absoluteUrl(ruPath) }],
-        ["meta", { property: "og:locale:alternate", content: locale === "en" ? "ru_RU" : "en_US" }],
+        ["meta", { property: "og:locale:alternate", content: localeSeo[locale].alternateOgLocale }],
       );
     }
   }
@@ -729,10 +813,22 @@ export default withMermaid(defineConfig({
   },
   transformPageData(pageData) {
     const description = extractPageDescription(pageData.relativePath);
-    pageData.frontmatter.head ??= [];
-    pageData.frontmatter.head.push(...buildPageHead(pageData, description));
+    const title = resolvePageTitle(pageData.relativePath, pageData.title);
+    const hasTitleOverride = Boolean(titleOverrides[pageData.relativePath]);
 
-    return { description };
+    pageData.title = title;
+    pageData.frontmatter.title = title;
+
+    if (hasTitleOverride) {
+      pageData.titleTemplate = false;
+      pageData.frontmatter.titleTemplate = false;
+    }
+
+    pageData.frontmatter.head ??= [];
+    pageData.frontmatter.head.push(...buildPageHead({ relativePath: pageData.relativePath, title }, description));
+    pageData.frontmatter.head.push(...buildStructuredDataHead({ relativePath: pageData.relativePath, title }, description));
+
+    return hasTitleOverride ? { title, titleTemplate: false, description } : { title, description };
   },
   head: [
     ["link", { rel: "icon", href: "/favicon.ico", sizes: "any" }],

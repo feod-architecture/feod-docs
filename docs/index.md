@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: FEOD
-  text: FRACTAL ENTITY ORIENTED DESIGN
-  tagline: Методология организации frontend-проектов вокруг модулей, public API, фрактальной структуры и контролируемых зависимостей.
+  text: Fractal Entity Oriented Design
+  tagline: FEOD (Fractal Entity Oriented Design) — методология организации frontend-проектов вокруг модулей, public API, фрактальной структуры и контролируемых зависимостей.
   image:
     src: /feod-logo.svg
     alt: FEOD

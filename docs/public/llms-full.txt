@@ -1,0 +1,165 @@
+# FEOD Full Context
+
+> Expanded AI-readable context for FEOD (Fractal Entity Oriented Design), a frontend architecture methodology for modules, public API, fractal structure, and controlled dependencies.
+
+Canonical site: https://fractal-oriented.tech/
+
+English docs: https://fractal-oriented.tech/en/
+
+Russian docs: https://fractal-oriented.tech/
+
+## What FEOD Is
+
+FEOD means Fractal Entity Oriented Design. It is a methodology for organizing frontend applications around structural entities with clear roles. The main goal is to keep a growing frontend codebase understandable, reviewable, and enforceable through import rules and explicit public APIs.
+
+FEOD is not a UI component taxonomy and not a backend runtime module system. It is a source-code architecture model for frontend projects.
+
+## Where To Start
+
+Use these pages first:
+
+- English overview: https://fractal-oriented.tech/en/get-started/overview
+- Russian overview: https://fractal-oriented.tech/get-started/overview
+- English quick start: https://fractal-oriented.tech/en/get-started/quick-start
+- Russian quick start: https://fractal-oriented.tech/get-started/quick-start
+- English FEOD in 5 minutes: https://fractal-oriented.tech/en/get-started/feod-in-5-minutes
+- Russian FEOD in 5 minutes: https://fractal-oriented.tech/get-started/feod-in-5-minutes
+
+For a new project, start with the minimal top-level structure and add modules only when a real responsibility exists. For an existing project, identify stable product areas first, then move imports behind public APIs gradually.
+
+## Core Model
+
+FEOD uses five canonical top-level levels:
+
+- `app`: application startup, routing, providers, top-level composition, and application wiring.
+- `pages`: route-level pages and large entry scenarios.
+- `modules`: product or responsibility modules with internal structure and explicit public API.
+- `common`: reusable FEOD entities not tied to one product module.
+- `global`: environment declarations, shims, polyfills, and rare side-effect setup that affects the whole application.
+
+The methodology treats files and directories as FEOD entities. A FEOD entity is a structural unit with a role and constraints. It is not the same as a DDD entity.
+
+## Import Rules
+
+The import matrix is the normative source for dependencies:
+
+- `app` may compose pages, modules, and common entities.
+- `pages` may use modules and common entities.
+- `modules` may use common entities and their own internals.
+- `common` must stay independent from product modules and pages.
+- `global` must not become an application dependency bucket.
+
+External code must not import internal files of another FEOD entity. Deep imports are treated as boundary violations because they turn implementation details into hidden public contracts.
+
+Primary reference:
+
+- https://fractal-oriented.tech/en/reference/import-matrix
+- https://fractal-oriented.tech/reference/import-matrix
+
+## Public API
+
+Public API is the supported external contract of a FEOD entity. In TypeScript projects, it is usually represented by an `index.ts` file at the root of the entity.
+
+Rules:
+
+- consumers import another FEOD entity from its root public API;
+- internal directories such as `ui`, `model`, `api`, `lib`, `config`, and `types` are not external entry points by default;
+- an exported symbol becomes part of the supported contract;
+- moving implementation files should not force consumers to update imports if the public API remains stable.
+
+Primary reference:
+
+- https://fractal-oriented.tech/en/reference/public-api
+- https://fractal-oriented.tech/reference/public-api
+
+## Fractality
+
+Fractality means that the same structural discipline can repeat at different scales. A large module can contain internal submodules, and those submodules can also have roles and public APIs when the responsibility justifies it.
+
+Fractality does not mean unlimited nesting. A new level or submodule should appear only when it reduces ambiguity and protects a real boundary.
+
+Primary reference:
+
+- https://fractal-oriented.tech/en/core-concepts/fractality
+- https://fractal-oriented.tech/core-concepts/fractality
+
+## Entity Orientation
+
+Entity orientation means every structural element should have a clear role. When a developer sees `app`, `pages`, `modules`, `common`, `global`, `index.ts`, or a module README, they should understand what belongs there and what does not.
+
+FEOD entity is a documentation and structure term. Do not explain it as a DDD entity unless explicitly contrasting the two.
+
+Primary reference:
+
+- https://fractal-oriented.tech/en/core-concepts/entity-orientation
+- https://fractal-oriented.tech/core-concepts/entity-orientation
+
+## Common Boundaries
+
+`common` is not a dumping ground. It stores reusable FEOD entities that are not tied to one product module. If code knows a specific business scenario, it usually belongs in a module, not in `common`.
+
+Use `common` for stable technical contracts and shared entities with clear reuse criteria. Avoid moving code there only because two places currently need it.
+
+Primary guide:
+
+- https://fractal-oriented.tech/en/guides/common-boundaries
+- https://fractal-oriented.tech/guides/common-boundaries
+
+## Migration Notes
+
+When migrating from FSD, FEOD should not be treated as a mechanical rename of layers. FEOD uses levels and modules, not FSD layers, slices, and segments as the primary structure.
+
+When migrating from regular modular architecture, the main work is usually to define public APIs, stop deep imports, and make dependency direction explicit.
+
+Useful guides:
+
+- https://fractal-oriented.tech/en/guides/migration-from-fsd
+- https://fractal-oriented.tech/en/guides/migration-from-modular
+- https://fractal-oriented.tech/guides/migration-from-fsd
+- https://fractal-oriented.tech/guides/migration-from-modular
+
+## Review Checklist
+
+When reviewing FEOD changes, check:
+
+- whether the new code belongs to the chosen level;
+- whether module boundaries are explicit;
+- whether external imports go through public API;
+- whether `common` contains only independent reusable entities;
+- whether deep imports introduce hidden coupling;
+- whether exceptions are documented instead of becoming implicit rules.
+
+Primary guide:
+
+- https://fractal-oriented.tech/en/guides/code-review
+- https://fractal-oriented.tech/guides/code-review
+
+## Tools
+
+FEOD documentation describes future and supporting tool scenarios:
+
+- FEOD Analyzer: graph, import, and public API checks.
+- ESLint plugin: lint rules for accepted architecture constraints.
+- AI rules: project instructions for AI-assisted work.
+- FEOD config: machine-readable configuration for levels, modules, and allowed deviations.
+
+Tool pages:
+
+- https://fractal-oriented.tech/en/tools/
+- https://fractal-oriented.tech/tools/
+
+## Canonical Terms
+
+Use these terms consistently:
+
+- FEOD
+- Fractal Entity Oriented Design
+- FEOD entity
+- level
+- module
+- public API
+- import matrix
+- deep import
+- controlled dependency
+
+Avoid presenting FEOD as a renamed FSD, a universal backend architecture, or a UI component methodology.
