@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -27,6 +27,30 @@ function readDistFile(path) {
   }
 
   return readFileSync(fullPath, "utf8");
+}
+
+function readDistJavaScriptBundle() {
+  const files = [];
+
+  function collect(dir) {
+    for (const entry of readdirSync(dir)) {
+      const path = join(dir, entry);
+      const stat = statSync(path);
+
+      if (stat.isDirectory()) {
+        collect(path);
+        continue;
+      }
+
+      if (path.endsWith(".js")) {
+        files.push(path);
+      }
+    }
+  }
+
+  collect(join(distDir, "assets"));
+
+  return files.map((file) => readFileSync(file, "utf8")).join("\n");
 }
 
 function expectMatch(content, pattern, message) {
@@ -90,6 +114,7 @@ const manifest = readDistFile("site.webmanifest");
 const robots = readDistFile("robots.txt");
 const llms = readDistFile("llms.txt");
 const llmsFull = readDistFile("llms-full.txt");
+const clientBundle = readDistJavaScriptBundle();
 
 expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+href="\/favicon\.ico"/, "Missing ICO favicon link");
 expectMatch(indexHtml, /<link[^>]+rel="shortcut icon"[^>]+href="\/favicon\.ico"/, "Missing shortcut ICO favicon link");
@@ -152,6 +177,8 @@ expectMatch(llmsFull, /^# FEOD Full Context/m, "llms-full.txt must include full 
 expectMatch(llmsFull, /## Import Rules/, "llms-full.txt must include import rules context");
 expectMatch(llmsFull, /## Public API/, "llms-full.txt must include public API context");
 expectMatch(llmsFull, /## Where To Start/, "llms-full.txt must include onboarding context");
+expectMatch(clientBundle, /\/_vercel\/insights\/script\.js/, "Client bundle must inject Vercel Web Analytics");
+expectMatch(clientBundle, /\/_vercel\/speed-insights\/script\.js/, "Client bundle must inject Vercel Speed Insights");
 
 const indexDescription = getDescription(indexHtml, "index.html");
 const overviewDescription = getDescription(overviewHtml, "get-started/overview.html");
