@@ -117,6 +117,8 @@ const llmsFull = readDistFile("llms-full.txt");
 const clientBundle = readDistJavaScriptBundle();
 
 expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+href="\/favicon\.ico"/, "Missing ICO favicon link");
+expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+type="image\/svg\+xml"[^>]+href="data:image\/svg\+xml,/, "Missing inline SVG favicon link");
+expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+type="image\/svg\+xml"[^>]+href="\/favicon\.svg"/, "Missing SVG favicon link");
 expectMatch(indexHtml, /<link[^>]+rel="shortcut icon"[^>]+href="\/favicon\.ico"/, "Missing shortcut ICO favicon link");
 expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+href="\/favicon-32x32\.png"/, "Missing 32x32 PNG favicon link");
 expectMatch(indexHtml, /<link[^>]+rel="icon"[^>]+href="\/favicon-16x16\.png"/, "Missing 16x16 PNG favicon link");

@@ -14,6 +14,8 @@ const siteUrl = resolveSiteUrl(process.env.SITE_URL || process.env.VITEPRESS_SIT
 const githubUrl = "https://github.com/feod-architecture/feod-docs";
 const socialImagePath = "/feod-logo.png";
 const themeColor = "#111827";
+const inlineFavicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Cpath d='M12 42 29 8h23L36 30h14L22 58l8-22H12Z' fill='%23f97316'/%3E%3Cpath d='M25 38 36 15h9L29 36h11L25 50l5-12h-5Z' fill='%23fef3c7'/%3E%3C/svg%3E";
 
 type LocaleKey = keyof typeof siteDescriptions;
 
@@ -831,6 +833,8 @@ export default withMermaid(defineConfig({
     return hasTitleOverride ? { title, titleTemplate: false, description } : { title, description };
   },
   head: [
+    ["link", { rel: "icon", type: "image/svg+xml", href: inlineFavicon }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     ["link", { rel: "icon", href: "/favicon.ico", sizes: "any" }],
     ["link", { rel: "shortcut icon", href: "/favicon.ico" }],
     ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
